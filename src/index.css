@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: #FFFFFF;
+  color: #111111;
+  font-family: 'Lora', Georgia, 'Times New Roman', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.9;
+  font-size: 18px;
+}
+
+/* Pure Minimal App Layout */
+.pure-zen-app {
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  /* Support iOS safe area */
+  padding-top: calc(2.5rem + env(safe-area-inset-top));
+  padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
+}
+
+/* Centered Reading Column */
+.pure-story-feed {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual Story Item */
+.pure-story-item {
+  margin-bottom: 4rem;
+}
+
+.pure-story-title {
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.pure-story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pure-story-paragraph {
+  font-size: 1.1rem;
+  color: #111111;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Minimalist Dot Separator Between Stories */
+.pure-story-separator {
+  text-align: center;
+  color: #999999;
+  font-size: 0.9rem;
+  letter-spacing: 0.5em;
+  margin-top: 3.5rem;
+}
+
+/* Infinite Scroll Sentinel */
+.pure-sentinel {
+  height: 40px;
+  width: 100%;
+}
+
+/* iOS WebView Mobile Adjustments */
+@media (max-width: 640px) {
+  html, body {
+    font-size: 17px;
+  }
+
+  .pure-zen-app {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .pure-story-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .pure-story-paragraph {
+    font-size: 1.05rem;
+    text-align: left;
+  }
+}

@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { STORIES } from './data/buddhistContent';
 import type { StoryItem } from './data/buddhistContent';
+import { getStoryParagraphs, getStoryTitle } from './data/translations';
+import type { Language } from './data/translations';
 
 interface RenderedStory {
   uniqueId: string;
@@ -10,6 +12,10 @@ interface RenderedStory {
 const BATCH_SIZE = 3;
 
 export function App() {
+  const [language, setLanguage] = useState<Language>(() => {
+    const savedLanguage = window.localStorage.getItem('language');
+    return savedLanguage === 'en' ? 'en' : 'vi';
+  });
   const [feed, setFeed] = useState<RenderedStory[]>([]);
   const sequenceRef = useRef(0);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
@@ -62,14 +68,41 @@ export function App() {
     return () => observer.disconnect();
   }, [loadMoreStories]);
 
+  useEffect(() => {
+    window.localStorage.setItem('language', language);
+    document.documentElement.lang = language;
+    document.title = language === 'vi'
+      ? 'Lời Đức Phật — Trí Tuệ Phật Giáo'
+      : 'The Buddha’s Teachings — Buddhist Wisdom';
+  }, [language]);
+
   return (
     <div className="pure-zen-app">
+      <nav className="language-switcher" aria-label={language === 'vi' ? 'Chọn ngôn ngữ' : 'Choose language'}>
+        <button
+          className="language-option"
+          type="button"
+          aria-pressed={language === 'vi'}
+          onClick={() => setLanguage('vi')}
+        >
+          VN
+        </button>
+        <span aria-hidden="true">/</span>
+        <button
+          className="language-option"
+          type="button"
+          aria-pressed={language === 'en'}
+          onClick={() => setLanguage('en')}
+        >
+          EN
+        </button>
+      </nav>
       <main className="pure-story-feed">
         {feed.map(({ uniqueId, story }) => (
           <article key={uniqueId} className="pure-story-item">
-            <h2 className="pure-story-title">{story.title}</h2>
+            <h2 className="pure-story-title">{getStoryTitle(story, language)}</h2>
             <div className="pure-story-body">
-              {story.paragraphs.map((p, idx) => (
+              {getStoryParagraphs(story, language).map((p, idx) => (
                 <p key={idx} className="pure-story-paragraph">
                   {p}
                 </p>

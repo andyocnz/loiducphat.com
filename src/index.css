@@ -28,6 +28,44 @@ html, body {
   padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
 }
 
+.language-switcher {
+  position: fixed;
+  top: calc(1rem + env(safe-area-inset-top));
+  right: calc(1rem + env(safe-area-inset-right));
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #dddddd;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #999999;
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(8px);
+}
+
+.language-option {
+  border: 0;
+  background: transparent;
+  color: #999999;
+  font: inherit;
+  cursor: pointer;
+}
+
+.language-option[aria-pressed='true'] {
+  color: #111111;
+  font-weight: 700;
+}
+
+.language-option:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid #555555;
+  outline-offset: 2px;
+}
+
 /* Centered Reading Column */
 .pure-story-feed {
   width: 100%;
@@ -86,6 +124,7 @@ html, body {
 
   .pure-zen-app {
     padding: 1.5rem 1.2rem;
+    padding-top: calc(3.75rem + env(safe-area-inset-top));
   }
 
   .pure-story-title {
